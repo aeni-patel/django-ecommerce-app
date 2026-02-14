@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Display Page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d1b2a; /* Dark blue */
+      color: #f0f0f0; /* Light gray */
+    }
+
+    .navbar {
+      background-color: #1b263b; /* Slightly lighter dark blue */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar a, .navbar .navbar-brand {
+      color: #f0f0f0; /* Light gray */
+      text-decoration: none;
+    }
+
+    .navbar a:hover {
+      color: #38bdf8; /* Cyan */
+    }
+
+    .card {
+      background-color: #1b263b; /* Card background matching theme */
+      color: #f0f0f0; /* Card text color */
+      border: none;
+      border-radius: 7px;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+      flex: 1 1 calc(33.333% - 20px); /* Allow three cards per row with space */
+      margin: 7px; /* Space between cards */
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .card img {
+      border-top-left-radius: 7px;
+      border-top-right-radius: 7px;
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .product-name {
+      font-weight: bold;
+    }
+
+    .product-price {
+      text-align: right;
+      font-size: 1.1rem;
+      color: #38bdf8; /* Highlighted price color */
+    }
+
+    .products-grid {
+      display: flex;
+      flex-wrap: wrap; /* Allow items to wrap */
+      justify-content: center; /* Center items in the row */
+      margin: -10px; /* Negative margin to offset card margins */
+    }
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 calc(100% - 20px); /* Full width for smaller screens */
+  }
+}
+
+/* Center single card in a row */
+@media (min-width: 769px) {
+  .card {
+    flex: 0 1 calc(33.333% - 20px); /* Maintain three cards per row */
+  }
+}
+    .user-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-info img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .navbar .dropdown-menu {
+      background-color: #1b263b; /* Dark background for dropdown */
+    }
+
+    .navbar .dropdown-item {
+      color: #f0f0f0; /* Light text color for dropdown items */
+    }
+
+    .navbar .dropdown-item:hover {
+      background-color: #38bdf8; /* Highlighted background color on hover */
+      color: #0d1b2a; /* Dark text color on hover */
+    }
+    .btn-custom {
+      background-color: #1b263b; /* Match the navbar background */
+      color: #f0f0f0; /* Light gray text */
+      border: 1px solid #38bdf8; /* Cyan border */
+      transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+    .btn-custom:hover {
+       background-color: #38bdf8; /* Change background on hover */
+       color: #0d1b2a; /* Dark text color on hover */
+}
+
+  </style>
+</head>
+<body>
+{% if messages %}
+{% for i in messages %}
+<script>alert("{{ i }}");</script>
+{% endfor %}
+{% endif %}
+  <!-- Navbar -->
+  {% include "nav.html" %}
+  <!-- Main Section -->
+    <div class="container my-5">
+      <h2 class="text-center mb-4">Products</h2>
+    <div class="products-grid">
+      <!-- Product Cards -->
+      {% for i in data %}
+        <div class="card">
+          <a href="/singleproducts/{{ i.id }}">
+           <img src="/media/{{ i.product_image }}" class="card-img-top" alt="{{ i.product_name }}">
+          </a>
+            <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <span class="product-name">{{ i.product_name }}</span>
+              <span class="product-price">Rs. {{ i.price }}</span>
+            </div>
+
+        </div>
+      </div> <!-- Closing div for card moved here -->
+      {% endfor %}
+      </div>
+     </div>
+    <!-- Pagination controls -->
+  <div class="pagination mt-4 d-flex justify-content-end">
+    <span class="step-links">
+      {% if data.has_previous %}
+          <a href="?page=1" class="btn btn-custom me-2">&laquo; First</a>
+          <a href="?page={{ data.previous_page_number }}" class="btn btn-custom me-2">Previous</a>
+      {% endif %}
+
+      <span class="current me-2">
+          Page {{ data.number }} of {{ data.paginator.num_pages }}.
+      </span>
+
+      {% if data.has_next %}
+          <a href="?page={{ data.next_page_number }}" class="btn btn-custom me-2">Next</a>
+          <a href="?page={{ data.paginator.num_pages }}" class="btn btn-custom">Last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+  </html>

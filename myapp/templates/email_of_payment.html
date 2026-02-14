@@ -1,0 +1,92 @@
+<!-- order_payment_confirmation_email.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Payment Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333333;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #dddddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f8f8;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #777777;
+        }
+    </style>
+</head>
+<body>
+    <h2>Payment Confirmation</h2>
+
+    <p>Hi {{ username }},</p>
+
+    <p>Thank you for your purchase!We have received your order and it will be processed soon.</p>
+
+    <h3>Order Summary</h3>
+    <table>
+        <tr>
+            <th>Payment Method</th>
+            <td>{{ payment }}</td>
+        </tr>
+        <tr>
+            <th>Total Amount</th>
+            <td>{{ total }}</td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>{{ address }}</td>
+        </tr>
+         <tr>
+            <th>phone</th>
+            <td>{{ phone }}</td>
+        </tr>
+
+    </table>
+
+    <h3>Items Ordered</h3>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+       {% for item in product %}
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>₹{{ item.price }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
+    <p>We'll notify you again once your order has been shipped. If you have any questions or need further assistance, feel free to reply to this email.</p>
+
+    <p>Thanks again for shopping with us!</p>
+
+    <p>Best regards,<br><strong>E-com website</strong></p>
+
+    <div class="footer">
+        <p>Need help? Contact us at <a href="mailto:support@yourcompany.com">support@yourcompany.com</a></p>
+    </div>
+</body>
+</html>
