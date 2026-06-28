@@ -11,9 +11,6 @@ A web app for browsing products, managing a cart, and placing orders.
 ## Tech
 - Django, Python, Bootstrap, SQLite
 
-## Known Issues
-- Email notifications may fail
-- Payment functionality currently not working
 
 ## Setup
 ```bash
