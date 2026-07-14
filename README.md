@@ -7,7 +7,7 @@ A web app for browsing products, managing a cart, and placing orders.
 - Product search
 - Shopping cart
 - Admin dashboard
-- Pyment 
+- Payment 
 
 ## Tech
 - Django, Python, Bootstrap, SQLite
